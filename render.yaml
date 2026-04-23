@@ -1,9 +1,36 @@
 services:
-  # A Docker web service
+  # FastAPI Backend Service - API for crop recommendation and yield prediction
   - type: web
-    name: agriMLmodels
-    runtime: python
+    name: agriMLmodels-api
+    runtime: python310
     plan: free
-    autoDeploy: false
+    autoDeploy: true
+    branch: main
     buildCommand: pip install -r requirements.txt
-    startCommand: uvicorn app:app --host 0.0.0.0 --port $PORT
+    startCommand: uvicorn src.app:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10
+      - key: ENVIRONMENT
+        value: production
+      - key: LOG_LEVEL
+        value: info
+
+  # Streamlit Frontend Service - UI for user interactions
+  - type: web
+    name: agriMLmodels-ui
+    runtime: python310
+    plan: free
+    autoDeploy: true
+    branch: main
+    buildCommand: pip install -r requirements.txt
+    startCommand: streamlit run src/ui_app.py --server.port=$PORT --server.address=0.0.0.0 --client.showErrorDetails=false
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10
+      - key: ENVIRONMENT
+        value: production
+      - key: STREAMLIT_SERVER_HEADLESS
+        value: "true"
+      - key: API_URL
+        value: https://agriMLmodels-api.onrender.com
