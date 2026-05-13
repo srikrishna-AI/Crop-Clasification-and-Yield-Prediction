@@ -1,0 +1,19 @@
+1st terminal 
+miniconda prompt
+conda activate karshaka
+cd "C:\crop recommendation and yeild prediction"
+uvicorn app:app --reload
+
+
+if conda not found----conda create -n karshaka python=3.10
+
+2nd terminal
+open - anaconds terminal
+conda activate karshaka
+cd "C:\crop recommendation and yeild prediction"
+streamlit run ui_app.py
+
+
+pip install -r requirements.txt
+
+

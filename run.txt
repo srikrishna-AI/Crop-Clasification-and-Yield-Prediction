@@ -1,0 +1,2 @@
+conda activate karshaka
+uvicorn app:app --reload
