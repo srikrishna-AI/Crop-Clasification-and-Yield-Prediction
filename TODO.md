@@ -1,10 +1,7 @@
-- [ ] Update src/ui_app.py to use API_BASE_URL for backend calls (done for recomendCrop/yieldPrediction)
-- [x] Update render.yaml to deploy backend (FastAPI) as one Render web service
-- [x] Update render.yaml to deploy frontend (Streamlit) as another Render web service
+# TODO
 
-- [x] Ensure backend startCommand points to src/app.py and proper module path
-- [x] Ensure frontend startCommand runs streamlit from src/ui_app.py
-- [x] Set Streamlit environment variable API_BASE_URL to backend service URL
-- [ ] Local sanity check: run FastAPI and Streamlit and verify API calls
-- [ ] Attempt Render deploy and confirm both services come up
+- [x] Update `render.yaml` to set Render Python `runtimeVersion` to Python 3.10 for backend and frontend
+- [x] Update `render.yaml` buildCommand to use `pip install --only-binary=:all:` to force wheel installs (avoid pandas source build)
+- [ ] Re-deploy to Render and confirm build succeeds
+- [ ] Quick runtime sanity check: backend `/` and Streamlit-triggered `/recomendCrop` and `/yieldPrediction`
 

@@ -3,21 +3,24 @@ services:
   - type: web
     name: agri-backend
     runtime: python
+    runtimeVersion: 3.10
     plan: free
     autoDeploy: false
-    buildCommand: pip install -r requirements.txt
+    buildCommand: pip install --only-binary=:all: -r requirements.txt
     startCommand: uvicorn src.app:app --host 0.0.0.0 --port $PORT
 
   # Frontend (Streamlit)
   - type: web
     name: agri-frontend
     runtime: python
+    runtimeVersion: 3.10
     plan: free
     autoDeploy: false
-    buildCommand: pip install -r requirements.txt
+    buildCommand: pip install --only-binary=:all: -r requirements.txt
     envVars:
       # Render will substitute this with the backend service URL at deploy time.
       # If Render doesn't auto-resolve service URLs in your project, set it manually in the Render dashboard.
       - key: API_BASE_URL
         value: "https://agri-backend.onrender.com"
     startCommand: streamlit run src/ui_app.py --server.address 0.0.0.0 --server.port $PORT
+
